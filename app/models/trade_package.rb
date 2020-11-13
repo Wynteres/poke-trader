@@ -1,0 +1,2 @@
+class TradePackage < ApplicationRecord
+end
