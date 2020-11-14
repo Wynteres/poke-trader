@@ -1,6 +1,6 @@
 class Api::V1::PokemonsController < ApplicationController
   def list
-    render json: Pokemon::ListPokemonsPaginated.new(list_params).fetch_list
+    render json: ListPokemonsPaginated.new(list_params).fetch_list
   end
 
   def show; end

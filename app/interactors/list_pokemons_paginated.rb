@@ -1,4 +1,4 @@
-class Pokemon::ListPokemonsPaginated
+class ListPokemonsPaginated
   def initialize(page_index:)
     @page_index = page_index
   end

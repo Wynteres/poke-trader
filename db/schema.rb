@@ -26,17 +26,18 @@ ActiveRecord::Schema.define(version: 2020_11_13_163612) do
   end
 
   create_table "trade_packages", force: :cascade do |t|
-    t.bigint "trade_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["trade_id"], name: "index_trade_packages_on_trade_id"
   end
 
   create_table "trades", force: :cascade do |t|
+    t.bigint "sent_package_id"
+    t.bigint "received_package_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["received_package_id"], name: "index_trades_on_received_package_id"
+    t.index ["sent_package_id"], name: "index_trades_on_sent_package_id"
   end
 
   add_foreign_key "pokemons", "trade_packages"
-  add_foreign_key "trade_packages", "trades"
 end
