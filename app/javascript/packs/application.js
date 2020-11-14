@@ -9,6 +9,12 @@ require("@rails/activestorage").start()
 require("channels")
 import "bootstrap"
 
+import ReactOnRails from 'react-on-rails';
+import TradeForm from '../components/trade_form';
+
+ReactOnRails.register({
+  TradeForm
+});
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
