@@ -3,8 +3,6 @@ class TradesController < ApplicationController
     @trades = Trade.all
   end
 
-  def new; end
-
   def create
     @trade = CreateTradeFromHash.new(create_trade_params).create
 
