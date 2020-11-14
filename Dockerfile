@@ -1,11 +1,13 @@
 FROM ruby:2.6.6-stretch
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-RUN mkdir /pokeTrader
-WORKDIR /pokeTrader
-COPY Gemfile /pokeTrader/Gemfile
-COPY Gemfile.lock /pokeTrader/Gemfile.lock
+ENV RAILS_ROOT /var/www/
+RUN mkdir -p $RAILS_ROOT
+WORKDIR $RAILS_ROOT
+COPY Gemfile ./
+COPY Gemfile.lock ./
 RUN bundle install
-COPY . /pokeTrader
+RUN bundle exec rails assets:precompile
+COPY . .
 
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh

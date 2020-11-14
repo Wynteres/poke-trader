@@ -1,17 +1,15 @@
 class Api::V1::PokemonsController < ApplicationController
   def list
-    render json: Interactors::Pokemon::List.new(list_params).fetch_list_by_page
+    render json: Pokemon::ListPokemonsPaginated.new(list_params).fetch_list
   end
 
-  def show
-  end
+  def show; end
 
-  def search
-  end
+  def search; end
 
   private
 
   def list_params
-    { page_index: @params[:page].presence || 1 }
+    { page_index: params[:page].presence || 1 }
   end
 end
