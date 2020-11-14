@@ -1,4 +1,4 @@
-class CreateTradeFromHash
+class CreateTradeFromJson
   def initialize(sent_package_pokemons:, received_package_pokemons:)
     @sent_package_pokemons = sent_package_pokemons
     @received_package_pokemons = received_package_pokemons
@@ -19,8 +19,9 @@ class CreateTradeFromHash
 
   private
 
-  def build_pokemons_from(pokemon_hash_list)
-    pokemon_hash_list.map do |pokemon_attributes|
+  def build_pokemons_from(pokemon_json_list)
+    pokemon_json_list.map do |pokemon_json|
+      pokemon_attributes = JSON.parse(pokemon_json)
       Pokemon.new(pokemon_attributes)
     end
   end

@@ -4,11 +4,11 @@ class TradesController < ApplicationController
   end
 
   def create
-    @trade = CreateTradeFromHash.new(create_trade_params).create
+    @trade = CreateTradeFromJson.new(create_trade_params).create
 
     if @trade.valid?
       flash[:success] = 'Sua pokeTroca registrada!'
-      render 'trades/index'
+      redirect_to root_path
     else
       flash[:danger] = 'Er... Equipe rocket? Verifique sua troca, algo está errado!'
       render 'trades/new'

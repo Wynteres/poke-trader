@@ -59,13 +59,26 @@ export default class TradeForm extends React.Component {
       })
   }
 
-  renderListItens(pokemons) {
+  renderListItens(listKey, pokemons) {
     let itensList = []
 
     pokemons.forEach((pokemon) => {
+      let paramName
+
+      if(listKey == 'send') {
+        paramName = "trade[sent_package_pokemons][]"
+      } else if (listKey == 'receive') {
+        paramName = "trade[received_package_pokemons][]"
+      }
+
       itensList.push(
         <div key={pokemon.name} className='col-6 list-item'>
-          <div key={pokemon.name} className='row list-item'>
+          <input
+            type="hidden"
+            name={paramName}
+            value={JSON.stringify(pokemon)}
+          />
+          <div className='row list-item'>
             <div className="">
               <div
                 className='pokemon-image-wrapper'
@@ -172,6 +185,11 @@ export default class TradeForm extends React.Component {
     return (
       <div className="container">
         <form method="POST" action="/trades">
+          <input
+            type="hidden"
+            name="authenticity_token"
+            value={this.props.authenticityToken}
+          />
           <div className="row">
             <div className="col-6 inventory">
               <div className="w-100 text-center title">
@@ -179,7 +197,7 @@ export default class TradeForm extends React.Component {
               </div>
               <div className='poke-list-wrapper row'>
 
-                {this.renderListItens(this.state.pokemonsToSend) }
+                {this.renderListItens('send', this.state.pokemonsToSend) }
 
               </div>
             </div>
@@ -189,11 +207,12 @@ export default class TradeForm extends React.Component {
               </div>
               <div className='poke-list-wrapper row'>
 
-                {this.renderListItens(this.state.pokemonsToReceive) }
+                {this.renderListItens('receive', this.state.pokemonsToReceive) }
 
               </div>
             </div>
           </div>
+          <button type="submit" className="btn btn-primary">Submit</button>
         </form>
         <div className="pokemon-catalog-wrapper mt-4">
           <div className="row catalog">
