@@ -4,6 +4,13 @@ class ListPokemonsPaginated
   end
 
   def fetch_list
-    PokemonAdapter.list(page_index: @page_index)
+    result = Pokemon::Client.list(page_index: @page_index)
+    pokemon_list = PokemonAdapter.list(pokemons_data: result[:pokemons])
+
+    {
+      pokemons: pokemon_list,
+      next_page: result[:next_page],
+      previous_page: result[:previous_page]
+    }
   end
 end

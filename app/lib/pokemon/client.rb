@@ -1,5 +1,5 @@
 class Pokemon::Client
-  POKE_API_URL = 'https://pokeapi.co/api/v2/pokemon'
+  POKE_API_URL = 'https://pokeapi.co/api/v2/pokemon'.freeze
   QUANTITY_PER_PAGE = 20
 
   def self.list(**args)
@@ -11,8 +11,8 @@ class Pokemon::Client
     response = HTTParty.get("#{POKE_API_URL}?offset=#{offset}&limit=#{QUANTITY_PER_PAGE}")
 
     {
-      next_page: response['next'],
-      previous_page: response['previous'],
+      next_page: parse_page_number(response['next']),
+      previous_page: parse_page_number(response['previous']),
       pokemons: response['results']
     }
   end
@@ -23,5 +23,17 @@ class Pokemon::Client
 
   def fetch(id:)
     HTTParty.get("#{POKE_API_URL}/#{id}")
+  end
+
+  private
+
+  def parse_page_number(url)
+    return if url.nil?
+
+    uri = URI.parse(url)
+    query_params = CGI.parse(uri.query)
+    offset = query_params['offset'].first.to_i
+
+    (offset / QUANTITY_PER_PAGE) + 1
   end
 end

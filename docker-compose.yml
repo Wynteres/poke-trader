@@ -25,3 +25,6 @@ services:
         - "80:80"
     depends_on:
         - db
+    dns:
+      - 8.8.8.8
+      - 4.4.4.4
