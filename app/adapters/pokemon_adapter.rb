@@ -7,11 +7,11 @@ class PokemonAdapter
     pokemons_data = Pokemon::Client.list(page_index: page_index)
     pokemons = build_pokemons_from_json(pokemons_data[:pokemons])
 
-    PokemonList.new(
+    {
       pokemons: pokemons,
       next_page: pokemons_data[:next_page],
       previous_page: pokemons_data[:previous_page]
-    )
+    }
   end
 
   private
