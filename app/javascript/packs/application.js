@@ -8,12 +8,20 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 import "bootstrap"
+import axios from "axios";
 
 import ReactOnRails from 'react-on-rails';
 import TradeForm from '../components/trade_form';
 
 ReactOnRails.register({
   TradeForm
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  window.axios = axios;
+  axios.defaults.headers.common["X-CSRF-Token"] = document
+    .querySelector('meta[name="csrf-token"]')
+    .getAttribute("content");
 });
 
 

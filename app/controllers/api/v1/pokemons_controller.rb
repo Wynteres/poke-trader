@@ -10,6 +10,7 @@ class Api::V1::PokemonsController < ApplicationController
   private
 
   def list_params
-    { page_index: params[:page].presence || 1 }
+    page = params[:page].present? ? params[:page].to_i : 1
+    { page_index: page }
   end
 end

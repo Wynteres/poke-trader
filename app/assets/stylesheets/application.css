@@ -47,7 +47,6 @@ a:hover {
 
 html,
 body {
-  height: 100%;
   background-color: #333;
 }
 
@@ -164,7 +163,7 @@ body {
 
 .inventory {
   border: 1px solid white;
-  height: 400px;
+  height: 350px;
 }
 .inventory .title {
   padding: 10px 0px;
@@ -182,4 +181,17 @@ body {
 }
 .pokemon-info .pokemon-name {
   border-bottom: 2px solid white;
+}
+
+.catalog-selector-wrapper button {
+  margin: 5px 5px 10px 5px;
+}
+
+.pagination button {
+  margin: 10px;
+}
+
+.catalog-spinner {
+  min-height: 300px;
+  padding: 15% 0;
 }

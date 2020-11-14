@@ -1,274 +1,68 @@
 import React from 'react';
+import axios from "axios"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 
 export default class TradeForm extends React.Component {
+  constructor(props) {
+    super(props);
+    const currentPage = 1
 
-
-
-  pokemons() {
-    return [{
-      "id": null,
-      "name": "bulbasaur",
-      "base_experience": 64,
-      "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "trade_package_id": null,
-      "created_at": null,
-      "updated_at": null
-    },
-    {
-      "id": null,
-      "name": "ivysaur",
-      "base_experience": 142,
-      "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
-      "trade_package_id": null,
-      "created_at": null,
-      "updated_at": null
-    },
-    {
-      "id": null,
-      "name": "venusaur",
-      "base_experience": 236,
-      "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
-      "trade_package_id": null,
-      "created_at": null,
-      "updated_at": null
-    },{
-      "id": null,
-      "name": "bulbasaur",
-      "base_experience": 64,
-      "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "trade_package_id": null,
-      "created_at": null,
-      "updated_at": null
-    },
-    {
-      "id": null,
-      "name": "ivysaur",
-      "base_experience": 142,
-      "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
-      "trade_package_id": null,
-      "created_at": null,
-      "updated_at": null
-    },
-    {
-      "id": null,
-      "name": "venusaur",
-      "base_experience": 236,
-      "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
-      "trade_package_id": null,
-      "created_at": null,
-      "updated_at": null
-    }]
+    this.state = {
+      pokemonsToSend: [],
+      pokemonsToReceive: [],
+      pokemonCatalog: {},
+      currentPage,
+      loadingPokemons: true
+    }
+    this.fetchCatalog(currentPage)
   }
 
-  catalog() {
-    return [
-      {
-        "id": null,
-        "name": "bulbasaur",
-        "base_experience": 64,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "ivysaur",
-        "base_experience": 142,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "venusaur",
-        "base_experience": 236,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "charmander",
-        "base_experience": 62,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "charmeleon",
-        "base_experience": 142,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "charizard",
-        "base_experience": 240,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "squirtle",
-        "base_experience": 63,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "wartortle",
-        "base_experience": 142,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "blastoise",
-        "base_experience": 239,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "caterpie",
-        "base_experience": 39,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "metapod",
-        "base_experience": 72,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/11.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "butterfree",
-        "base_experience": 178,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "weedle",
-        "base_experience": 39,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "kakuna",
-        "base_experience": 72,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/14.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "beedrill",
-        "base_experience": 178,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/15.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "pidgey",
-        "base_experience": 50,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/16.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "pidgeotto",
-        "base_experience": 122,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/17.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "pidgeot",
-        "base_experience": 216,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/18.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "rattata",
-        "base_experience": 51,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/19.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "raticate",
-        "base_experience": 145,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/20.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "spearow",
-        "base_experience": 52,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/21.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": null,
-        "name": "fearow",
-        "base_experience": 155,
-        "image_path": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png",
-        "trade_package_id": null,
-        "created_at": null,
-        "updated_at": null
-      }
-    ]
+  fetchCatalog(page) {
+    if(page == null) {
+      return
+    }
+
+    const { pokemonCatalog } = this.state
+
+    if(pokemonCatalog[page] != undefined) {
+      this.setState({
+        currentPage: page
+      })
+
+      return
+    }
+
+    this.setState({
+      loadingPokemons: true
+    })
+
+    axios
+      .get(`/api/v1/pokemons?page=${page}`)
+      .then(response => {
+        const nextCatalog = this.state.pokemonCatalog
+        nextCatalog[page] = {
+          pokemons: response.data.pokemons,
+          nextPage: response.data.next_page,
+          previousPage: response.data.previous_page,
+        }
+
+        this.setState({
+          pokemonCatalog: nextCatalog,
+          currentPage: page,
+          loadingPokemons: false
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
-  renderListItens() {
+  renderListItens(pokemons) {
     let itensList = []
-    this.pokemons().forEach((pokemon) => {
+
+    pokemons.forEach((pokemon) => {
       itensList.push(
         <div key={pokemon.name} className='col-6 list-item'>
           <div key={pokemon.name} className='row list-item'>
@@ -302,9 +96,20 @@ export default class TradeForm extends React.Component {
   }
 
   renderCatalogOptions(){
+    const { currentPage, pokemonCatalog, loadingPokemons } = this.state
+
+    if(pokemonCatalog[currentPage] == undefined || loadingPokemons ) {
+      return(
+        <div className="container catalog-spinner d-flex justify-content-center align-middle">
+            <div className="spinner-border"></div>
+        </div>
+      )
+    }
+
+    const pokemons = pokemonCatalog[currentPage].pokemons
 
     let catalogItens = []
-    this.catalog().forEach((pokemon) => {
+    pokemons.forEach((pokemon) => {
       catalogItens.push(
         <div>
           <div>
@@ -320,9 +125,9 @@ export default class TradeForm extends React.Component {
               />
             </div>
           </div>
-          <div>
-            <button type="button" class="btn btn-primary"><FontAwesomeIcon icon={faChevronLeft}/></button>
-            <button type="button" class="btn btn-danger"><FontAwesomeIcon icon={faChevronRight}/></button>
+          <div className="catalog-selector-wrapper">
+            <button type="button" onClick={() => this.addPokemonToList("Send", pokemon)} className="btn btn-primary"><FontAwesomeIcon icon={faChevronLeft}/></button>
+            <button type="button" onClick={() => this.addPokemonToList("Receive", pokemon)} className="btn btn-danger"><FontAwesomeIcon icon={faChevronRight}/></button>
           </div>
         </div>
       )
@@ -331,6 +136,37 @@ export default class TradeForm extends React.Component {
     return catalogItens
   }
 
+  renderCatalogPagination(){
+    const { pokemonCatalog, currentPage } = this.state
+    let nextPage = null
+    let previousPage = null
+    if(pokemonCatalog[currentPage] != undefined) {
+      nextPage = pokemonCatalog[currentPage].nextPage
+      previousPage = pokemonCatalog[currentPage].previousPage
+    }
+
+    return(
+      <div className="d-flex justify-content-center row pagination">
+          <button type="button" disabled={previousPage == null} onClick={() => this.fetchCatalog(previousPage) } className="btn btn-secondary"><FontAwesomeIcon icon={faChevronLeft}/>Anterior</button>
+          <button type="button" disabled={nextPage == null} onClick={() => this.fetchCatalog(nextPage) } className="btn btn-secondary">Próxima<FontAwesomeIcon icon={faChevronRight}/></button>
+      </div>
+    )
+  }
+
+  addPokemonToList(list, pokemon){
+    let pokemon_list = this.state[`pokemonsTo${list}`]
+    if(pokemon_list.length >= 6) {
+      return
+    }
+
+    const new_list = pokemon_list.concat(pokemon)
+
+    if(list == 'Send') {
+      this.setState({pokemonsToSend: new_list})
+    } else if(list == 'Receive') {
+      this.setState({pokemonsToReceive: new_list})
+    }
+  }
 
   render() {
     return (
@@ -343,7 +179,7 @@ export default class TradeForm extends React.Component {
               </div>
               <div className='poke-list-wrapper row'>
 
-                {this.renderListItens() }
+                {this.renderListItens(this.state.pokemonsToSend) }
 
               </div>
             </div>
@@ -353,7 +189,7 @@ export default class TradeForm extends React.Component {
               </div>
               <div className='poke-list-wrapper row'>
 
-                {this.renderListItens() }
+                {this.renderListItens(this.state.pokemonsToReceive) }
 
               </div>
             </div>
@@ -364,11 +200,10 @@ export default class TradeForm extends React.Component {
             {this.renderCatalogOptions()}
           </div>
 
-          <div className="row pagination">
-
-          </div>
+          {this.renderCatalogPagination()}
         </div>
       </div>
     );
   }
 }
+
