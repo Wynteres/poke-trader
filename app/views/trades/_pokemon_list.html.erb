@@ -1,0 +1,13 @@
+
+  <div class="row">
+  <% pokemons.each do |pokemon|%>
+    <div
+      class='pokemons-list-image-wrapper'
+      style="background-image: url('<%= pokemon.image_path%> ');"
+      data-toggle="tooltip" data-placement="bottom" title='<%= pokemon.name%>'
+    >
+      <img src='<%= pokemon.image_path%>' alt='<%= pokemon.name%>' class="img-thumbnail">
+      <% pokemon.name%>
+    </div>
+  <% end %>
+</div>

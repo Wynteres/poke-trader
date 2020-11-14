@@ -1,2 +1,29 @@
-eeee
-aaa
+<div class="container">
+  <h1 class="cover-heading">PokeTrocas já realizadas</h1>
+  <hr/>
+  <div>
+    <% @trades.each do |trade| %>
+      <div class="row">
+        <div class="col-12">
+          <%=
+            render partial: 'pokemon_list',
+            locals: {
+              pokemons: trade.sent_package.pokemons
+            }
+          %>
+        </div>
+        <div class="col-12 text-center mt-3 mb-3">
+        Foi trocado por
+        </div>
+        <div class="col-12">
+          <%=
+            render partial: 'pokemon_list',
+            locals: {
+              pokemons: trade.received_package.pokemons
+            }
+          %>
+        <div>
+      <div>
+    <% end %>
+  <div>
+</div>
