@@ -1,5 +1,5 @@
 class Pokemon::Client
-  POKE_API_URL = 'https://pokeapi.co/api/v2/pokemon'.freeze
+  POKE_API_URL = ENV['POKE_API_URL']
   QUANTITY_PER_PAGE = 22
 
   def self.list(**args)

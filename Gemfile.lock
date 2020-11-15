@@ -70,6 +70,10 @@ GEM
     crack (0.4.4)
     crass (1.0.6)
     diff-lcs (1.4.4)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.9.0)
     execjs (2.7.0)
     ffi (1.13.1)
@@ -263,6 +267,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
+  dotenv-rails
   font-awesome-rails
   httparty (~> 0.18.1)
   jbuilder (~> 2.7)
