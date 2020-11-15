@@ -49,4 +49,5 @@ group :test do
   gem 'rails-controller-testing', '~> 1.0.5'
   gem 'shoulda-matchers', '~> 4.3.0'
   gem 'vcr', '~> 6.0.0'
+  gem 'webmock', '~> 3.8.3', require: false
 end
