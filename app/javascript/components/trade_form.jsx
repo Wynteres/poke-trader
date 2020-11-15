@@ -212,11 +212,28 @@ export default class TradeForm extends React.Component {
 
   validateForm() {
     const { pokemonsToSend, pokemonsToReceive } = this.state;
+    let sent_package_pokemons = []
+    let received_package_pokemons = []
+
+    pokemonsToSend.forEach((pokemon) => {
+      sent_package_pokemons.push(JSON.stringify(pokemon))
+    })
+
+    pokemonsToReceive.forEach((pokemon) => {
+      received_package_pokemons.push(JSON.stringify(pokemon))
+    })
+
+
+    const params = {
+      trade: {
+        "sent_package_pokemons": sent_package_pokemons,
+        received_package_pokemons
+      }
+    }
 
     axios
-      .get(`/api/v1/trades/validate`)
+      .get(`/api/v1/trades/validate`, { params } )
       .then((response) => {
-        console.log(response.data.valid);
         const formValid =
           response.data.valid &&
           pokemonsToSend.length > 0 &&
@@ -225,6 +242,12 @@ export default class TradeForm extends React.Component {
         this.setState({
           formValid,
         });
+        if(formValid) {
+          alert("Pikapika (´ ∀ ` *)\nparece que essa troca é justa!")
+        } else {
+          alert("Hey, cuidado com a equipe rocket...\nParece que essa troca não está justa!	(」°ロ°)」")
+        }
+
       })
       .catch((error) => {
         this.setState({
