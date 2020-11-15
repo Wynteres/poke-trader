@@ -140,6 +140,7 @@ body {
   background-color: #fff;
   border-radius: 10px;
   margin: 3px;
+  image-rendering: pixelated;
 }
 
 /* Set the image to fill its parent and make transparent */
