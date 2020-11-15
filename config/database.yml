@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
-  database: pokeTrader_production
-  username: pokeTrader
-  password: <%= ENV['POKETRADER_DATABASE_PASSWORD'] %>
+  url: postgres://afqlpasqldcsmb:e5d07ea935a0359fbaf68eaeff81affd45a6590048fea6a978ba94f40fbdf016@ec2-184-72-235-80.compute-1.amazonaws.com:5432/de6l7n2m8mthis
+  database: de6l7n2m8mthis
+  username: afqlpasqldcsmb
+  password: e5d07ea935a0359fbaf68eaeff81affd45a6590048fea6a978ba94f40fbdf016
