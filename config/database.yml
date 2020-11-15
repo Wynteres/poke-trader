@@ -17,7 +17,6 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: <%= ENV.fetch("DATABASE_HOST") { '172.29.0.2' } %>
   username: postgres
   password: postgres
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -25,6 +24,7 @@ default: &default
 development:
   <<: *default
   database: pokeTrader_development
+  host: <%= ENV.fetch("DATABASE_HOST") %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -81,7 +81,7 @@ test:
 #
 production:
   <<: *default
-  url: postgres://afqlpasqldcsmb:e5d07ea935a0359fbaf68eaeff81affd45a6590048fea6a978ba94f40fbdf016@ec2-184-72-235-80.compute-1.amazonaws.com:5432/de6l7n2m8mthis
-  database: de6l7n2m8mthis
-  username: afqlpasqldcsmb
-  password: e5d07ea935a0359fbaf68eaeff81affd45a6590048fea6a978ba94f40fbdf016
+  url: <%= ENV['DATABASE_URL'] %>
+  database: <%= ENV['DATABASE_NAME'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
