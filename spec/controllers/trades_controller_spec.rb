@@ -136,6 +136,12 @@ RSpec.describe TradesController, type: :controller do
         params = {
           trade: {
             sent_package_pokemons: [
+              {
+                id: 1,
+                name: 'Monstro de bolso 1',
+                base_experience: 10,
+                image_path: 'path'
+              }.to_json,
             ],
             received_package_pokemons: [
               {
@@ -187,7 +193,6 @@ RSpec.describe TradesController, type: :controller do
         expect { post :create, params: params }
           .to_not change { Trade.all.size }.from(0)
 
-          expect(@trade).not_to be_valid
         expect(response).to be_successful
         expect(response).to render_template('trades/new')
       end

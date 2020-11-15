@@ -4,7 +4,10 @@ RSpec.describe CreateTradeFromJson do
   describe '#new' do
     describe 'when passing right params' do
       it 'returns described class instance without raise error' do
-        right_params = { sent_package_pokemons: [], received_package_pokemons: [] }
+        right_params = {
+          sent_package_pokemons: [],
+          received_package_pokemons: []
+        }
         expect { described_class.new(right_params) }.not_to raise_error
       end
     end
@@ -12,13 +15,21 @@ RSpec.describe CreateTradeFromJson do
     describe 'when passing wrong params' do
       it 'raise argument error' do
         right_params = {}
-        expect { described_class.new(right_params) }.to raise_error(ArgumentError)
+        expect { described_class.new(right_params) }
+          .to raise_error(ArgumentError)
       end
     end
   end
 
   describe '#create' do
-    subject(:create_trade_from_json_instance) { described_class.new({ sent_package_pokemons: [], received_package_pokemons: [] }) }
+    subject(:create_trade_from_json_instance) do
+      described_class.new(
+        {
+          sent_package_pokemons: [],
+          received_package_pokemons: []
+        }
+      )
+    end
 
     describe 'when trade build is successful' do
       describe 'when trade is invalid' do
@@ -27,7 +38,8 @@ RSpec.describe CreateTradeFromJson do
           allow(invalid_trade_mock).to receive(:save)
 
           build_trade_from_json_mock = double(build: invalid_trade_mock)
-          allow(BuildTradeFromJson).to receive(:new).and_return(build_trade_from_json_mock)
+          allow(BuildTradeFromJson).to receive(:new)
+            .and_return(build_trade_from_json_mock)
 
           result = create_trade_from_json_instance.create
 
@@ -42,7 +54,8 @@ RSpec.describe CreateTradeFromJson do
           allow(invalid_trade_mock).to receive(:save)
 
           build_trade_from_json_mock = double(build: invalid_trade_mock)
-          allow(BuildTradeFromJson).to receive(:new).and_return(build_trade_from_json_mock)
+          allow(BuildTradeFromJson).to receive(:new)
+            .and_return(build_trade_from_json_mock)
 
           result = create_trade_from_json_instance.create
 
@@ -55,7 +68,8 @@ RSpec.describe CreateTradeFromJson do
     describe 'when trade build is unsuccessful' do
       it 'let the error go up chain' do
         allow(BuildTradeFromJson).to receive(:new).and_raise(StandardError)
-        expect{create_trade_from_json_instance.create}.to raise_error(StandardError)
+        expect { create_trade_from_json_instance.create }
+          .to raise_error(StandardError)
       end
     end
   end
