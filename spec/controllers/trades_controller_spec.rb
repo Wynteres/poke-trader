@@ -76,8 +76,6 @@ RSpec.describe TradesController, type: :controller do
 
         expect { post :create, params: params }
           .to raise_error(ArgumentError)
-
-        expect(response).to be_successful
       end
     end
 
@@ -127,9 +125,10 @@ RSpec.describe TradesController, type: :controller do
           .to_not change { Trade.all.size }.from(0)
         expect(response).to be_successful
         expect(response).to render_template('trades/new')
+        expect(flash[:danger])
+          .to eq('Er... Equipe rocket? Verifique sua troca, algo está errado!')
       end
     end
-
 
     describe 'when the pokemon quantity is not within 1 to 6 range' do
       it 'stays in new page with error message' do
@@ -141,7 +140,7 @@ RSpec.describe TradesController, type: :controller do
                 name: 'Monstro de bolso 1',
                 base_experience: 10,
                 image_path: 'path'
-              }.to_json,
+              }.to_json
             ],
             received_package_pokemons: [
               {
@@ -195,6 +194,8 @@ RSpec.describe TradesController, type: :controller do
 
         expect(response).to be_successful
         expect(response).to render_template('trades/new')
+        expect(flash[:danger])
+          .to eq('Er... Equipe rocket? Verifique sua troca, algo está errado!')
       end
     end
   end
