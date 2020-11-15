@@ -17,7 +17,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: <%= ENV.fetch("DATABASE_HOST") %>
+  host: <%= ENV.fetch("DATABASE_HOST") { '172.29.0.2' } %>
   username: postgres
   password: postgres
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -81,7 +81,6 @@ test:
 #
 production:
   <<: *default
-  host: <%= Rails.application.credentials.database[:host] %>
-  database: <%= Rails.application.credentials.database[:name] %>
-  username: <%= Rails.application.credentials.database[:user] %>
-  password: <%= Rails.application.credentials.database[:password] %>
+  database: pokeTrader_production
+  username: pokeTrader
+  password: <%= ENV['POKETRADER_DATABASE_PASSWORD'] %>
