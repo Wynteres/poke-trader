@@ -1,0 +1,76 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://pokeapi.co/api/v2/pokemon?limit=22&offset=-22
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 16 Nov 2020 12:01:42 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d6b78d40719cce50a74c63cac6313feae1605528102; expires=Wed, 16-Dec-20
+        12:01:42 GMT; path=/; domain=.pokeapi.co; HttpOnly; SameSite=Lax; Secure
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=86400, s-maxage=86400
+      Etag:
+      - W/"68-u8YeWBuI/JD+lfco14roZgpQLws"
+      Function-Execution-Id:
+      - n38zqhe1dlqb
+      X-Cloud-Trace-Context:
+      - 3f0c9adb77f868eff5fa27166d6e4e07
+      X-Country-Code:
+      - BR
+      X-Powered-By:
+      - Express
+      X-Served-By:
+      - cache-gru17142-GRU
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1605527846.996010,VS0,VE651
+      Vary:
+      - Accept-Encoding,cookie,need-authorization, x-fh-requested-host, accept-encoding
+      Cf-Cache-Status:
+      - HIT
+      Age:
+      - '256'
+      Cf-Request-Id:
+      - '067287bd1600002dda97275000000001'
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?s=g4BK1LjX%2FWwNmzChL9KvxsiuJMHPUMguCBnUQAXLn59dbkzhlZ0hmMfSZ9pA%2BATGbgn%2FgX%2FNtXH33hWbkQT8irb3aWgj%2BjRhJXQN"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 5f310f0e89d02dda-SSA
+    body:
+      encoding: ASCII-8BIT
+      string: '{"count":1050,"next":"https://pokeapi.co/api/v2/pokemon?offset=0&limit=22","previous":null,"results":[]}'
+  recorded_at: Mon, 16 Nov 2020 12:01:42 GMT
+recorded_with: VCR 6.0.0
