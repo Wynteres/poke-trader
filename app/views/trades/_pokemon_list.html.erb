@@ -1,13 +1,20 @@
 
 <div class="row">
   <% pokemons.each do |pokemon|%>
-    <div
-      class='pokemons-list-image-wrapper pokemon-image-wrapper'
-      style="background-image: url('<%= pokemon.image_path%> ');"
-      data-toggle="tooltip" data-placement="bottom" title='<%= pokemon.name%>'
-    >
-      <img src='<%= pokemon.image_path%>' alt='<%= pokemon.name%>' class="img-thumbnail">
-      <% pokemon.name%>
-    </div>
+      <div class='col-2 pokemons-list-image-wrapper' >
+        <div
+          class='pokemon-image-wrapper'
+          style="background-image: url('<%= pokemon.image_path%> ');"
+          data-toggle="tooltip" data-placement="bottom" title='<%= pokemon.name%> | XP <%= pokemon.base_experience%>'
+        >
+          <img src='<%= pokemon.image_path%>' alt='<%= pokemon.name%>' class="img-thumbnail">
+          <% pokemon.name%>
+        </div>
+
+        <div class="col-2 m-0 p-1 poke-description">
+          <p><%= pokemon.name%></p>
+          <p>XP: <%= pokemon.base_experience%></p>
+        </div>
+      </div>
   <% end %>
 </div>

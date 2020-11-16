@@ -82,7 +82,7 @@ export default class TradeForm extends React.Component {
             value={JSON.stringify(pokemon)}
           />
           <div className='row list-item'>
-            <div className=''>
+            <div className='pokemon-trade-form'>
               <div
                 className='pokemon-image-wrapper'
                 style={{ backgroundImage: `url(${pokemon.image_path})` }}
