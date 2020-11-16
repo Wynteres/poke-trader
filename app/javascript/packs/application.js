@@ -8,6 +8,8 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 import "bootstrap"
+const images = require.context('../images', true)
+
 import axios from "axios";
 
 import ReactOnRails from 'react-on-rails';
