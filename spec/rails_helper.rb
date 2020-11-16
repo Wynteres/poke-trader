@@ -20,8 +20,6 @@ VCR.configure do |c|
   c.ignore_localhost = true
   c.cassette_library_dir = 'spec/fixtures/cassettes'
 
-  vcr_mode = ENV['VCR_MODE'] =~ /rec/i ? :all : :new_episodes
-
   c.hook_into :webmock
   c.default_cassette_options[:record] = :new_episodes
   c.configure_rspec_metadata!
@@ -29,6 +27,8 @@ end
 
 
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
