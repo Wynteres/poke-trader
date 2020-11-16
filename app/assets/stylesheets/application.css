@@ -163,7 +163,7 @@ body {
 
 .poke-description p {
   margin: 0;
-  width: 100vh
+  width: 15vh;
 }
 
 /* Set the image to fill its parent and make transparent */
@@ -187,7 +187,7 @@ body {
 
 .inventory {
   border: 1px solid white;
-  height: 350px;
+  min-height: 400px;
 }
 .inventory .title {
   padding: 10px 0px;
