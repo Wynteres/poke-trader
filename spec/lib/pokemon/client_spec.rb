@@ -63,7 +63,7 @@ RSpec.describe Pokemon::Client, :vcr do
 
         params = { page_index: 1 }
 
-        expect { described_class.list(params) }.to raise_error()
+        expect { described_class.list(params) }.to raise_error(KeyError)
       end
     end
   end

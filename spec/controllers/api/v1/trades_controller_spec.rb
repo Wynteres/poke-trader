@@ -24,7 +24,7 @@ RSpec.describe Api::V1::TradesController, type: :controller do
         }
 
         expect { get :validate, params: params }
-          .not_to raise_error(ArgumentError)
+          .not_to raise_error
         expect(response.status).to be(500)
         expect(response.body).to be_empty
       end

@@ -79,7 +79,7 @@ RSpec.describe BuildTradeFromJson do
       end
 
       it 'returns an unpersisted valid trade instance' do
-        expect { build_trade_from_json_instance.build }.to raise_error
+        expect { build_trade_from_json_instance.build }.to raise_error(NoMethodError)
       end
     end
   end
