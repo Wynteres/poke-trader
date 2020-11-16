@@ -2,7 +2,7 @@
 
 class TradesController < ApplicationController
   def index
-    @trades = Trade.all
+    @trades = Trade.all.order(id: :desc)
   end
 
   def create
