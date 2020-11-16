@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ListPokemonsPaginated
   def initialize(page_index:)
     @page_index = page_index

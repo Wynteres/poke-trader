@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PokemonAdapter
   def self.list(**args)
     new.list(args)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Trade < ApplicationRecord
   MAXIMUM_XP_DEVIATION_ACCEPTABLE = 64
 

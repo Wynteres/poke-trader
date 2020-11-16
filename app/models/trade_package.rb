@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TradePackage < ApplicationRecord
   has_many :pokemons, validate: true
 

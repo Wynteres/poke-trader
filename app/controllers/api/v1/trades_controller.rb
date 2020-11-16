@@ -1,20 +1,26 @@
-class Api::V1::TradesController < ApplicationController
-  def validate
-    trade = BuildTradeFromJson.new(validate_trade_params).build
+# frozen_string_literal: true
 
-    render json: { valid: trade.valid? }
-  rescue StandardError
-    head 500
-  end
+module Api
+  module V1
+    class TradesController < ApplicationController
+      def validate
+        trade = BuildTradeFromJson.new(validate_trade_params).build
 
-  private
+        render json: { valid: trade.valid? }
+      rescue StandardError
+        head 500
+      end
 
-  def validate_trade_params
-    trade_json = params.require(:trade)
+      private
 
-    JSON.parse(trade_json)
-        .symbolize_keys
-        .slice(:sent_package_pokemons, :received_package_pokemons)
-        .to_h
+      def validate_trade_params
+        trade_json = params.require(:trade)
+
+        JSON.parse(trade_json)
+            .symbolize_keys
+            .slice(:sent_package_pokemons, :received_package_pokemons)
+            .to_h
+      end
+    end
   end
 end

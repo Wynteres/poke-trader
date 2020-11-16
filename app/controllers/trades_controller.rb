@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TradesController < ApplicationController
   def index
     @trades = Trade.all

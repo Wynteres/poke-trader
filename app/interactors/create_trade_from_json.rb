@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTradeFromJson
   def initialize(sent_package_pokemons:, received_package_pokemons:)
     @trade_params = {

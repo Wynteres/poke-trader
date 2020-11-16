@@ -1,46 +1,50 @@
-class Pokemon::Client
-  POKE_API_URL = ENV['POKE_API_URL']
-  QUANTITY_PER_PAGE = 22
+# frozen_string_literal: true
 
-  class PokemonNotFound < StandardError; end
+class Pokemon
+  class Client
+    POKE_API_URL = ENV['POKE_API_URL']
+    QUANTITY_PER_PAGE = 22
 
-  def self.list(**args)
-    new.list(args)
-  end
+    class PokemonNotFound < StandardError; end
 
-  def list(page_index:)
-    offset = (page_index - 1) * QUANTITY_PER_PAGE
+    def self.list(**args)
+      new.list(args)
+    end
 
-    response = HTTParty.get("#{POKE_API_URL}?offset=#{offset}&limit=#{QUANTITY_PER_PAGE}")
+    def list(page_index:)
+      offset = (page_index - 1) * QUANTITY_PER_PAGE
 
-    {
-      next_page: parse_page_number(response.fetch('next')),
-      previous_page: parse_page_number(response.fetch('previous')),
-      pokemons: response.fetch('results')
-    }
-  end
+      response = HTTParty.get("#{POKE_API_URL}?offset=#{offset}&limit=#{QUANTITY_PER_PAGE}")
 
-  def self.fetch(**args)
-    new.fetch(args)
-  end
+      {
+        next_page: parse_page_number(response.fetch('next')),
+        previous_page: parse_page_number(response.fetch('previous')),
+        pokemons: response.fetch('results')
+      }
+    end
 
-  def fetch(id:)
-    response = HTTParty.get("#{POKE_API_URL}/#{id}")
+    def self.fetch(**args)
+      new.fetch(args)
+    end
 
-    raise PokemonNotFound unless response.success?
+    def fetch(id:)
+      response = HTTParty.get("#{POKE_API_URL}/#{id}")
 
-    response
-  end
+      raise PokemonNotFound unless response.success?
 
-  private
+      response
+    end
 
-  def parse_page_number(url)
-    return if url.nil?
+    private
 
-    uri = URI.parse(url)
-    query_params = CGI.parse(uri.query)
-    offset = query_params['offset'].first.to_i
+    def parse_page_number(url)
+      return if url.nil?
 
-    (offset / QUANTITY_PER_PAGE) + 1
+      uri = URI.parse(url)
+      query_params = CGI.parse(uri.query)
+      offset = query_params['offset'].first.to_i
+
+      (offset / QUANTITY_PER_PAGE) + 1
+    end
   end
 end

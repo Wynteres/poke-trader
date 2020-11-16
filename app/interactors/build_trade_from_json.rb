@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BuildTradeFromJson
   def initialize(sent_package_pokemons:, received_package_pokemons:)
     @sent_package_pokemons = sent_package_pokemons
