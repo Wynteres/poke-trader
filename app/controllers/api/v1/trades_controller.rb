@@ -3,6 +3,8 @@ class Api::V1::TradesController < ApplicationController
     trade = BuildTradeFromJson.new(validate_trade_params).build
 
     render json: { valid: trade.valid? }
+  rescue StandardError
+    head 500
   end
 
   private

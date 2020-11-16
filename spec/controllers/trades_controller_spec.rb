@@ -1,9 +1,34 @@
 require 'rails_helper'
 
-# Change this ArticlesController to your project
 RSpec.describe TradesController, type: :controller do
   describe '#create' do
-    describe 'when all params are right' do
+    describe 'when there is missing params' do
+      it 'raise error' do
+        params = {
+          trade: {
+            received_package_pokemons: [
+              {
+                id: 4,
+                name: 'Monstro de bolso 4',
+                base_experience: 10,
+                image_path: 'path'
+              },
+              {
+                id: 5,
+                name: 'Monstro de bolso 5',
+                base_experience: 10,
+                image_path: 'path'
+              }
+            ]
+          }
+        }
+
+        expect { post :create, params: params }
+          .to raise_error(ArgumentError)
+      end
+    end
+
+    describe 'when all params are valid' do
       it 'redirect to home with success message' do
         params = {
           trade: {
@@ -50,32 +75,6 @@ RSpec.describe TradesController, type: :controller do
 
         expect(response).to be_redirect
         expect(response).to redirect_to(root_path)
-      end
-    end
-
-    describe 'when there is missing params' do
-      it 'raise error' do
-        params = {
-          trade: {
-            received_package_pokemons: [
-              {
-                id: 4,
-                name: 'Monstro de bolso 4',
-                base_experience: 10,
-                image_path: 'path'
-              },
-              {
-                id: 5,
-                name: 'Monstro de bolso 5',
-                base_experience: 10,
-                image_path: 'path'
-              }
-            ]
-          }
-        }
-
-        expect { post :create, params: params }
-          .to raise_error(ArgumentError)
       end
     end
 
