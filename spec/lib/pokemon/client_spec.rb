@@ -18,6 +18,16 @@ RSpec.describe Pokemon::Client, :vcr do
         expect(result[:pokemons].size)
           .to be(Pokemon::Client::QUANTITY_PER_PAGE)
       end
+
+      it 'returns each pokemon name and info url' do
+        params = { page_index: 1 }
+        result = described_class.list(params)
+
+        pokemon_sample = result[:pokemons].first
+
+        expect(pokemon_sample.keys)
+          .to contain_exactly('name', 'url')
+      end
     end
 
     describe 'when page index does not exists' do

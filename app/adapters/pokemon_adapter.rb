@@ -5,7 +5,7 @@ class PokemonAdapter
 
   def list(pokemons_data:)
     pokemons_data.map do |pokemon|
-      pokemon_id = pokemon['url'].split('/').last
+      pokemon_id = pokemon['url'].split('/').last.to_i
       pokemon_attributes = Pokemon::Client.fetch(id: pokemon_id)
 
       Pokemon.new(filter_attributes(pokemon_attributes))
