@@ -1,11 +1,9 @@
 class Api::V1::PokemonsController < ApplicationController
   def list
-    render json: ListPokemonsPaginated.new(list_params).fetch_list
+    @pokemon_list = ListPokemonsPaginated.new(list_params).fetch_list
+  rescue StandardError
+    head 500
   end
-
-  def show; end
-
-  def search; end
 
   private
 

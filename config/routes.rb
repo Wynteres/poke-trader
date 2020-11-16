@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      get 'pokemons', to: 'pokemons#list'
+      get 'pokemons', to: 'pokemons#list', format: 'json'
       get 'trades/validate', to: 'trades#validate'
     end
   end
